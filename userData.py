@@ -158,10 +158,22 @@ class DataGenerator:
         ffile = open('folder', 'w')
         pfile = open('perm', 'w')
         vfile = open('version', 'w')
-        for u in self.folderList:
-            ufile.write(str(u.folder_id))
-            ufile.write('\t'+str(u.folder_name))
-            ufile.write('\t'+str(u.user_id)+'\n')
+        for u in self.userList:
+            ufile.write(str(u.user_id))
+            ufile.write(u.user_name)
+            ufile.write(u.password)
+            ufile.write(u.home_dir)
+        for d in self.docList:
+            dfile.write(str(d.doc_id))
+        for p in self.permissionList:
+            pfile.write()
+        for v in self.versionList:
+            vfile.write()
+        for f in self.folderList:
+            ffile.write(str(u.folder_id))
+            ffile.write('\t'+str(u.folder_name))
+            ffile.write('\t'+str(u.user_id)+'\n')
+
 
 
 
