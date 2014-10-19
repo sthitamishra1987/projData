@@ -129,13 +129,14 @@ class DataGenerator:
 
     def addPermissions(self):
         import random
-        self.permissionList = random.shuffle(self.permissionList)
-        for p in range(0, len(self.permissionList)/2):
-            if MAX_USERS - p.user_id > 13 :
+        random.shuffle(self.permissionList)
+        plen  = len(self.permissionList)
+        for pp in range(0, plen/2):
+            if MAX_USERS - self.permissionList[pp].user_id > 13 :
                 for u in range(0, 10):
                     permVal = Permission.VALUES[self.getRandom(0, len(Permission.VALUES)-1)]
-                    user_id = self.getRandom(p.user_id+1, MAX_USERS)
-                    perm = Permission(p.doc_id, user_id, permVal)
+                    user_id = self.getRandom(self.permissionList[pp].user_id+1, MAX_USERS)
+                    perm = Permission(self.permissionList[pp].doc_id, user_id, permVal)
                     self.permissionList.append(perm)
 
 
@@ -166,13 +167,13 @@ class DataGenerator:
         for d in self.docList:
             dfile.write(str(d.doc_id))
         for p in self.permissionList:
-            pfile.write()
+            pfile.write(' ')
         for v in self.versionList:
-            vfile.write()
+            vfile.write(' ')
         for f in self.folderList:
-            ffile.write(str(u.folder_id))
-            ffile.write('\t'+str(u.folder_name))
-            ffile.write('\t'+str(u.user_id)+'\n')
+            ffile.write(str(f.folder_id))
+            ffile.write('\t'+str(f.folder_name))
+            ffile.write('\t'+str(f.user_id)+'\n')
 
 
 
@@ -181,5 +182,3 @@ if __name__ == '__main__':
     data = DataGenerator()
     data.generateData()
     data.writeData()
-
-
